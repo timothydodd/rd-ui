@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  width: 100%;
+  background-color: transparent;
+  border-radius: var(--rd-border-radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--rd-primary);
+  height: 8px;
+}
+
+.rd-progress-bar {
+  background-color: var(--rd-primary);
+  height: 100%;
+  border-radius: var(--rd-border-radius-sm);
+  transition: width 0.3s ease;
+}

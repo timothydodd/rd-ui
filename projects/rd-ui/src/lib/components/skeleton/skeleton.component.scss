@@ -1,0 +1,73 @@
+.rd-skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--rd-surface-variant);
+  border-radius: var(--rd-border-radius-sm);
+}
+
+.rd-skeleton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  height: 100%;
+  width: 150%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  animation: rd-skeleton-shine 1.5s infinite ease-in-out;
+}
+
+.rd-skeleton.rd-skeleton-circle {
+  border-radius: 50%;
+}
+
+.rd-skeleton-none::after {
+  animation: none;
+}
+
+@keyframes rd-skeleton-shine {
+  0% {
+    left: -150%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+// Preset sizes for common use cases
+.rd-skeleton.title {
+  height: 24px;
+  width: 100px;
+}
+
+.rd-skeleton.input {
+  height: 48px;
+  width: 100px;
+}
+
+.rd-skeleton.input-md {
+  height: 48px;
+  width: 150px;
+}
+
+.rd-skeleton.input-lg {
+  height: 48px;
+  width: 250px;
+}
+
+.rd-skeleton.input-xl {
+  height: 48px;
+  width: 450px;
+}
+
+.rd-skeleton.full {
+  height: 48px;
+  width: 100%;
+}

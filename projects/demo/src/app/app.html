@@ -1,0 +1,221 @@
+<rd-toast></rd-toast>
+
+@if (showSpinner()) {
+  <rd-spinner>Loading...</rd-spinner>
+}
+
+<div class="demo-container">
+  <header class="demo-header">
+    <h1>rd-ui Component Demo</h1>
+    <p>Interactive demo of all rd-ui components</p>
+  </header>
+
+  <main class="demo-content">
+    <!-- Dropdown Section -->
+    <section class="component-section">
+      <h2>Dropdown</h2>
+
+      <div class="demo-row">
+        <div class="demo-item">
+          <h3>Single Select</h3>
+          <rd-dropdown
+            [options]="dropdownOptions"
+            [placeholder]="'Select an option'"
+            [(ngModel)]="singleValue"
+          ></rd-dropdown>
+          <p class="demo-value">Value: {{ singleValue() | json }}</p>
+        </div>
+
+        <div class="demo-item">
+          <h3>Multi Select with Search</h3>
+          <rd-dropdown
+            [options]="dropdownOptions"
+            [placeholder]="'Select multiple'"
+            [multiple]="true"
+            [searchable]="true"
+            [showSelectAll]="true"
+            [(ngModel)]="multiValue"
+          ></rd-dropdown>
+          <p class="demo-value">Value: {{ multiValue() | json }}</p>
+        </div>
+
+        <div class="demo-item">
+          <h3>Tri-State Mode</h3>
+          <rd-dropdown
+            [options]="dropdownOptions"
+            [placeholder]="'Include/Exclude'"
+            [triState]="true"
+            [searchable]="true"
+            [(ngModel)]="triStateValue"
+          ></rd-dropdown>
+          <p class="demo-value">Value: {{ triStateValue() | json }}</p>
+        </div>
+      </div>
+
+      <div class="demo-row">
+        <div class="demo-item">
+          <h3>Size Variants</h3>
+          <div class="size-variants">
+            <rd-dropdown [options]="dropdownOptions" [placeholder]="'Small'" [size]="'sm'"></rd-dropdown>
+            <rd-dropdown [options]="dropdownOptions" [placeholder]="'Compact'" [size]="'compact'"></rd-dropdown>
+            <rd-dropdown [options]="dropdownOptions" [placeholder]="'Default'"></rd-dropdown>
+            <rd-dropdown [options]="dropdownOptions" [placeholder]="'Large'" [size]="'lg'"></rd-dropdown>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal Section -->
+    <section class="component-section">
+      <h2>Modal</h2>
+      <div class="demo-row">
+        <div class="demo-item">
+          <h3>Service-Based Modal</h3>
+          <button class="btn btn-primary" (click)="openModal()">Open Modal</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Toast Section -->
+    <section class="component-section">
+      <h2>Toast</h2>
+      <div class="demo-row">
+        <div class="demo-item">
+          <h3>Toast Notifications</h3>
+          <div class="button-group">
+            <button class="btn btn-success" (click)="showSuccess()">Success</button>
+            <button class="btn btn-danger" (click)="showError()">Error</button>
+            <button class="btn btn-info" (click)="showInfo()">Info</button>
+            <button class="btn btn-warning" (click)="showWarning()">Warning</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tabs Section -->
+    <section class="component-section">
+      <h2>Tabs</h2>
+      <div class="demo-row">
+        <div class="demo-item full-width">
+          <rd-tabs>
+            <rd-tab [id]="1" [title]="'Tab 1'">
+              <div class="tab-content-demo">
+                <h4>Tab 1 Content</h4>
+                <p>This is the content for the first tab. The tabs component uses ContentChildren pattern and signal-based state management.</p>
+              </div>
+            </rd-tab>
+            <rd-tab [id]="2" [title]="'Tab 2'">
+              <div class="tab-content-demo">
+                <h4>Tab 2 Content</h4>
+                <p>This is the content for the second tab. Tabs are rendered lazily - only the active tab content is displayed.</p>
+              </div>
+            </rd-tab>
+            <rd-tab [id]="3" [title]="'Tab 3'">
+              <div class="tab-content-demo">
+                <h4>Tab 3 Content</h4>
+                <p>This is the content for the third tab. You can add as many tabs as needed using the rd-tab component.</p>
+              </div>
+            </rd-tab>
+          </rd-tabs>
+        </div>
+      </div>
+    </section>
+
+    <!-- Input Switch Section -->
+    <section class="component-section">
+      <h2>Input Switch</h2>
+      <div class="demo-row">
+        <div class="demo-item">
+          <h3>Basic Toggle</h3>
+          <rd-input-switch [(ngModel)]="switchValue"></rd-input-switch>
+          <p class="demo-value">Value: {{ switchValue() }}</p>
+        </div>
+
+        <div class="demo-item">
+          <h3>Custom True/False Values</h3>
+          <rd-input-switch
+            [(ngModel)]="customSwitchValue"
+            [trueValue]="'yes'"
+            [falseValue]="'no'"
+          ></rd-input-switch>
+          <p class="demo-value">Value: "{{ customSwitchValue() }}"</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Checkbox Section -->
+    <section class="component-section">
+      <h2>Checkbox</h2>
+      <div class="demo-row">
+        <div class="demo-item">
+          <h3>Custom SVG Checkbox</h3>
+          <rd-checkbox
+            [label]="'Accept terms and conditions'"
+            [(ngModel)]="checkboxValue"
+          ></rd-checkbox>
+          <p class="demo-value">Checked: {{ checkboxValue() }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skeleton Section -->
+    <section class="component-section">
+      <h2>Skeleton</h2>
+      <div class="demo-row">
+        <div class="demo-item">
+          <h3>Rectangle (Default)</h3>
+          <div class="skeleton-stack">
+            <rd-skeleton [width]="'100%'" [height]="'20px'"></rd-skeleton>
+            <rd-skeleton [width]="'80%'" [height]="'20px'"></rd-skeleton>
+            <rd-skeleton [width]="'60%'" [height]="'20px'"></rd-skeleton>
+          </div>
+        </div>
+
+        <div class="demo-item">
+          <h3>Circle</h3>
+          <div class="skeleton-row">
+            <rd-skeleton [shape]="'circle'" [size]="'40px'"></rd-skeleton>
+            <rd-skeleton [shape]="'circle'" [size]="'60px'"></rd-skeleton>
+            <rd-skeleton [shape]="'circle'" [size]="'80px'"></rd-skeleton>
+          </div>
+        </div>
+
+        <div class="demo-item">
+          <h3>No Animation</h3>
+          <rd-skeleton [width]="'100%'" [height]="'40px'" [animation]="'none'"></rd-skeleton>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spinner Section -->
+    <section class="component-section">
+      <h2>Spinner</h2>
+      <div class="demo-row">
+        <div class="demo-item">
+          <h3>Fullscreen Overlay Spinner</h3>
+          <button class="btn btn-primary" (click)="toggleSpinner()">Show Spinner (3s)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Progress Bar Section -->
+    <section class="component-section">
+      <h2>Progress Bar</h2>
+      <div class="demo-row">
+        <div class="demo-item full-width">
+          <h3>Interactive Progress</h3>
+          <rd-progress-bar [progress]="progressValue()"></rd-progress-bar>
+          <div class="progress-controls">
+            <button class="btn btn-secondary" (click)="decrementProgress()">- 10%</button>
+            <span class="progress-value">{{ progressValue() }}%</span>
+            <button class="btn btn-secondary" (click)="incrementProgress()">+ 10%</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="demo-footer">
+    <p>rd-ui v0.0.1 - Shared Angular UI Components Library</p>
+  </footer>
+</div>

@@ -1,0 +1,47 @@
+.rd-tabs-container {
+  .rd-tab-nav {
+    display: flex;
+    border-bottom: 1px solid var(--rd-border-color);
+    margin-bottom: 1rem;
+
+    .rd-tab-link {
+      background: none;
+      border: none;
+      color: var(--rd-on-surface-muted);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+      position: relative;
+
+      &:hover {
+        color: var(--rd-on-surface);
+        background: var(--rd-surface-variant);
+      }
+
+      &.active {
+        color: var(--rd-primary);
+        border-bottom-color: var(--rd-primary);
+        background: var(--rd-surface);
+      }
+
+      &:first-child {
+        border-top-left-radius: var(--rd-border-radius);
+      }
+
+      &:last-child {
+        border-top-right-radius: var(--rd-border-radius);
+      }
+    }
+  }
+
+  .rd-tab-content {
+    .rd-tab-pane {
+      &.active {
+        display: block;
+      }
+    }
+  }
+}

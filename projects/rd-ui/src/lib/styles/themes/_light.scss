@@ -1,0 +1,40 @@
+// rd-ui Light Theme
+// Import this file in your app's global styles to apply the light theme.
+
+:root {
+  // Core colors
+  --rd-background: #ffffff;
+  --rd-foreground: #1a1a1a;
+  --rd-primary: #7c3aed;
+  --rd-secondary: #64748b;
+  --rd-success: #22c55e;
+  --rd-danger: #ef4444;
+  --rd-warning: #eab308;
+  --rd-info: #0ea5e9;
+
+  // Surface colors
+  --rd-surface: #f8fafc;
+  --rd-surface-variant: #f1f5f9;
+  --rd-surface-container: #e2e8f0;
+  --rd-surface-container-high: #cbd5e1;
+  --rd-surface-container-highest: #94a3b8;
+
+  // Text colors
+  --rd-on-surface: #1a1a1a;
+  --rd-on-surface-variant: #374151;
+  --rd-on-surface-muted: #6b7280;
+  --rd-on-primary: #ffffff;
+
+  // Component-specific
+  --rd-input-bg: #ffffff;
+  --rd-border-color: #e2e8f0;
+  --rd-focus-ring: rgba(124, 58, 237, 0.3);
+  --rd-modal-bg: #ffffff;
+  --rd-dropdown-bg: #ffffff;
+  --rd-shadow-color: rgba(0, 0, 0, 0.1);
+
+  // Spacing & sizing
+  --rd-border-radius: 8px;
+  --rd-border-radius-sm: 4px;
+  --rd-border-radius-lg: 12px;
+}

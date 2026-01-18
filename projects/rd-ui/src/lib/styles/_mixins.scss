@@ -1,0 +1,142 @@
+// rd-ui Shared SCSS Mixins
+// These mixins help maintain consistent styling across components.
+
+// Form control base styling
+@mixin form-control-base {
+  background-color: var(--rd-input-bg, var(--rd-surface-variant));
+  border: 1px solid var(--rd-border-color);
+  border-radius: var(--rd-border-radius);
+  color: var(--rd-on-surface);
+  padding: 0.75rem 1rem;
+  font-size: var(--rd-font-size-base);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, background-color 0.15s ease-in-out;
+
+  &:focus {
+    border-color: var(--rd-primary);
+    box-shadow: 0 0 0 3px var(--rd-focus-ring);
+    outline: none;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// Dropdown menu styling
+@mixin dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  min-width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.25rem 0;
+  background-color: var(--rd-dropdown-bg, var(--rd-surface));
+  border: 1px solid var(--rd-border-color);
+  border-radius: var(--rd-border-radius);
+  box-shadow: 0 4px 12px var(--rd-shadow-color);
+}
+
+// Dropdown item styling
+@mixin dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  color: var(--rd-on-surface);
+  transition: background-color 0.15s ease;
+
+  &:hover:not(.disabled) {
+    background-color: var(--rd-surface-variant);
+  }
+
+  &.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// Custom scrollbar styling
+@mixin custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--rd-surface-container) transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--rd-surface-container);
+    border-radius: 3px;
+
+    &:hover {
+      background-color: var(--rd-surface-container-high);
+    }
+  }
+}
+
+// Tag/badge styling
+@mixin tag-base {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--rd-surface-container);
+  border-radius: var(--rd-border-radius-sm);
+  font-size: var(--rd-font-size-sm);
+  color: var(--rd-on-surface);
+
+  lucide-icon {
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.15s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+// Count badge styling
+@mixin count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 0.375rem;
+  background-color: var(--rd-primary);
+  color: var(--rd-on-primary);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+// Search input styling
+@mixin search-input {
+  display: flex;
+  align-items: center;
+  background-color: var(--rd-input-bg);
+  border: none;
+  border-radius: var(--rd-border-radius-sm);
+  padding: 0.375rem 0.5rem;
+  color: var(--rd-on-surface);
+  font-size: var(--rd-font-size-sm);
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    background-color: var(--rd-surface-variant);
+  }
+
+  &::placeholder {
+    color: var(--rd-on-surface-muted);
+  }
+}
