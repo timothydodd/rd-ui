@@ -14,9 +14,12 @@ import { ModalContainerService } from './modal-container.service';
       animate.leave="rd-backdrop-leave"
     ></div>
     <div class="rd-modal-wrapper" (click)="onBackdropClick($event)">
-      <div class="rd-modal-container">
+      <div class="rd-modal-container" [class.rd-modal-centered]="centered">
         <div
           class="rd-modal"
+          [class.rd-modal-small]="size === 'small'"
+          [class.rd-modal-large]="size === 'large'"
+          [class.rd-modal-full]="size === 'full'"
           animate.enter="rd-modal-enter"
           animate.leave="rd-modal-leave"
           (click)="$event.stopPropagation()"
@@ -33,6 +36,8 @@ export class ModalComponent {
   modalContainerService = inject(ModalContainerService);
   modalId?: string;
   config?: { data?: any };
+  size: 'small' | 'default' | 'large' | 'full' = 'default';
+  centered = false;
 
   closeOnBackdropClick = true;
   childType = signal<Type<any> | null>(null);
