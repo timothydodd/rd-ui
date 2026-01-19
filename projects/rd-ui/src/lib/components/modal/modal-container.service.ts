@@ -19,7 +19,7 @@ export class ModalContainerService {
   private modalInstances = new Map<string, ModalInstance>();
   private modalCounter = 0;
 
-  openComponent<T>(component: Type<T>, config?: { data?: any }): ModalRef {
+  openComponent<T>(component: Type<T>, config?: ModalConfig): ModalRef {
     const modalId = `modal-${++this.modalCounter}`;
 
     const modalRef = createComponent(ModalComponent, {
@@ -29,13 +29,16 @@ export class ModalContainerService {
     const modalInstance: ModalInstance = {
       id: modalId,
       componentRef: modalRef,
-      config: { data: config?.data },
+      config: { data: config?.data, size: config?.size, centered: config?.centered },
       closeSubject: new Subject<any>(),
     };
 
     this.modalInstances.set(modalId, modalInstance);
 
     modalRef.instance.modalId = modalId;
+    modalRef.instance.config = { data: config?.data };
+    modalRef.instance.size = config?.size || 'default';
+    modalRef.instance.centered = config?.centered ?? false;
 
     modalRef.instance.close = () => {
       this.close(modalId);
@@ -148,6 +151,8 @@ export class ModalContainerService {
 
 export interface ModalConfig {
   data?: any;
+  size?: 'small' | 'default' | 'large' | 'full';
+  centered?: boolean;
 }
 
 export interface ModalRef {

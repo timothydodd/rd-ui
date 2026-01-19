@@ -101,6 +101,10 @@
   justify-content: center;
   padding: 2rem;
   pointer-events: none;
+
+  &.rd-modal-centered {
+    align-items: center;
+  }
 }
 
 .rd-modal {
@@ -125,6 +129,21 @@
     font-size: 24px;
     color: var(--rd-primary);
     text-align: center;
+  }
+
+  // Size variants
+  &.rd-modal-small {
+    max-width: 400px;
+    min-height: auto;
+  }
+
+  &.rd-modal-large {
+    max-width: 900px;
+  }
+
+  &.rd-modal-full {
+    max-width: 95vw;
+    min-height: 90vh;
   }
 }
 
