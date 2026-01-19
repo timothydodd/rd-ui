@@ -63,6 +63,71 @@
           </div>
         </div>
       </div>
+
+      <div class="demo-row">
+        <div class="demo-item">
+          <h3>Custom Templates</h3>
+          <p class="demo-description">Using rdDropdownLabel and rdDropdownOption directives for custom rendering</p>
+          <rd-dropdown
+            [items]="iconItems"
+            bindLabel="name"
+            [bindValue]="null"
+            placeholder="Select with icon"
+            [(ngModel)]="selectedIconItem"
+          >
+            <ng-template rdDropdownLabel let-item>
+              @if (item) {
+                <div class="custom-label">
+                  <span class="item-icon">{{ item.icon }}</span>
+                  <span class="item-name" [style.color]="item.color">{{ item.name }}</span>
+                </div>
+              } @else {
+                <span class="placeholder">Select with icon</span>
+              }
+            </ng-template>
+            <ng-template rdDropdownOption let-item let-index="index">
+              <div class="custom-option">
+                <span class="item-icon">{{ item.icon }}</span>
+                <span class="item-name">{{ item.name }}</span>
+                <span class="item-index">#{{ index + 1 }}</span>
+              </div>
+            </ng-template>
+          </rd-dropdown>
+          <p class="demo-value">Selected: {{ selectedIconItem() | json }}</p>
+        </div>
+
+        <div class="demo-item">
+          <h3>Loading & Pagination</h3>
+          <p class="demo-description">Opens dropdown to load, scroll to bottom for more</p>
+          <rd-dropdown
+            [items]="paginatedItems()"
+            bindLabel="name"
+            [bindValue]="null"
+            placeholder="Open to load items"
+            [loading]="paginationLoading()"
+            [searchable]="true"
+            [(ngModel)]="selectedPaginatedItem"
+            (openChange)="onOpenChange($event)"
+            (scrollToEnd)="onScrollToEnd()"
+            (searchChange)="onSearchChange($event)"
+          >
+            <ng-template rdDropdownOption let-item>
+              <div class="paginated-option">
+                <strong>{{ item.name }}</strong>
+                <small>{{ item.description }}</small>
+              </div>
+            </ng-template>
+          </rd-dropdown>
+          <div class="event-log">
+            <p>Open: {{ lastOpenChange() }}</p>
+            <p>Search: "{{ lastSearchTerm() }}"</p>
+            <p>Scroll to end: {{ scrollEndCount() }}x</p>
+            <p>Page: {{ currentPage() }}/5</p>
+            <p>Items: {{ paginatedItems().length }}</p>
+          </div>
+          <button class="btn btn-secondary btn-sm" (click)="resetPagination()">Reset</button>
+        </div>
+      </div>
     </section>
 
     <!-- Modal Section -->

@@ -116,6 +116,21 @@
   border: 1px solid var(--rd-border-color);
   border-radius: var(--rd-border-radius);
   box-shadow: 0 4px 12px var(--rd-shadow-color);
+
+  // Portal mode - fixed positioning to escape overflow:hidden containers
+  &.rd-dropdown-portal {
+    position: fixed;
+    top: auto;
+    left: auto;
+    margin-top: 0;
+    z-index: 10000;
+
+    // Ensure items container is scrollable in portal mode
+    .rd-dropdown-items {
+      max-height: 250px;
+      overflow-y: auto;
+    }
+  }
 }
 
 .rd-dropdown-search {
@@ -180,9 +195,10 @@
 }
 
 .rd-dropdown-items {
-  max-height: 200px;
+  max-height: 250px;
   overflow-y: auto;
   overflow-x: hidden;
+  overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: var(--rd-surface-container) transparent;
 
@@ -421,4 +437,49 @@
   border-top: 1px solid var(--rd-border-color);
   margin-top: 0.25rem;
   padding-top: 0.25rem;
+}
+
+// Loading state
+.rd-dropdown-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--rd-on-surface-muted);
+  cursor: default;
+
+  &:hover {
+    background-color: transparent;
+  }
+
+  .spin {
+    animation: rd-dropdown-spin 1s linear infinite;
+  }
+}
+
+@keyframes rd-dropdown-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Custom HTML content in options and selected value
+.custom-option,
+.custom-selected {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  overflow: hidden;
+
+  img {
+    max-width: 24px;
+    max-height: 24px;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
 }

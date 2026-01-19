@@ -214,3 +214,67 @@
     font-size: 0.875rem;
   }
 }
+
+// Custom template dropdown styles
+.demo-description {
+  font-size: 0.8rem;
+  color: var(--rd-on-surface-muted);
+  margin-bottom: 0.75rem;
+  font-style: italic;
+}
+
+.custom-label,
+.custom-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .item-icon {
+    font-size: 1.25rem;
+  }
+
+  .item-name {
+    font-weight: 500;
+  }
+
+  .item-index {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: var(--rd-on-surface-muted);
+  }
+}
+
+.paginated-option {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+
+  strong {
+    color: var(--rd-on-surface);
+  }
+
+  small {
+    color: var(--rd-on-surface-muted);
+    font-size: 0.75rem;
+  }
+}
+
+.event-log {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: var(--rd-surface-variant);
+  border-radius: var(--rd-border-radius-sm);
+  font-family: monospace;
+  font-size: 0.75rem;
+
+  p {
+    margin: 0.25rem 0;
+    color: var(--rd-on-surface-muted);
+  }
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+}
