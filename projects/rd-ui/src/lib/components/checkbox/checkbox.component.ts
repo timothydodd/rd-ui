@@ -5,8 +5,9 @@ import {
   forwardRef,
   input,
   output,
+  signal,
 } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 const CUSTOM_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -17,7 +18,7 @@ const CUSTOM_VALUE_ACCESSOR: any = {
 @Component({
   selector: 'rd-checkbox',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule],
   providers: [CUSTOM_VALUE_ACCESSOR],
   template: `
     <div class="rd-checkbox-wrapper">
@@ -26,8 +27,8 @@ const CUSTOM_VALUE_ACCESSOR: any = {
           class="rd-checkbox-trigger visuallyhidden"
           type="checkbox"
           [disabled]="disabled()"
-          [(ngModel)]="checked"
-          (change)="change($event)"
+          [checked]="checked()"
+          (change)="toggle()"
         />
         <span class="rd-checkbox-symbol">
           <svg
@@ -52,7 +53,7 @@ const CUSTOM_VALUE_ACCESSOR: any = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxComponent implements ControlValueAccessor {
-  checked = false;
+  checked = signal(false);
   disabled = input(false);
   label = input<string>('');
 
@@ -62,7 +63,7 @@ export class CheckboxComponent implements ControlValueAccessor {
   private onTouched: () => void = () => {};
 
   writeValue(obj: any): void {
-    this.checked = obj;
+    this.checked.set(!!obj);
   }
 
   registerOnChange(fn: any): void {
@@ -73,9 +74,11 @@ export class CheckboxComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  change(_e: any) {
-    this.onChange(this.checked);
-    this.checkedChange.emit(this.checked);
+  toggle(): void {
+    const value = !this.checked();
+    this.checked.set(value);
+    this.onChange(value);
+    this.checkedChange.emit(value);
     this.onTouched();
   }
 }
