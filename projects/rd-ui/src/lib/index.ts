@@ -1,5 +1,5 @@
 // Components
-export * from './components/dropdown';
+export * from './components/select';
 export * from './components/modal';
 export * from './components/toast';
 export * from './components/tabs';

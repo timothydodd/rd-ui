@@ -7,7 +7,7 @@
  */
 
 // Components
-export * from './lib/components/dropdown';
+export * from './lib/components/select';
 export * from './lib/components/modal';
 export * from './lib/components/toast';
 export * from './lib/components/tabs';

@@ -1,21 +1,21 @@
+import { JsonPipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
 import {
-  DropdownComponent,
-  DropdownOption,
-  DropdownOptionTemplateDirective,
-  DropdownLabelTemplateDirective,
-  ModalContainerService,
-  ToastComponent,
-  ToastService,
-  TabsComponent,
-  TabComponent,
-  InputSwitchComponent,
   CheckboxComponent,
+  InputSwitchComponent,
+  ModalContainerService,
+  ProgressBarComponent,
+  SelectComponent,
+  SelectLabelTemplateDirective,
+  SelectOption,
+  SelectOptionTemplateDirective,
   SkeletonComponent,
   SpinnerComponent,
-  ProgressBarComponent,
+  TabComponent,
+  TabsComponent,
+  ToastComponent,
+  ToastService,
 } from 'rd-ui';
 import { DemoModalComponent } from './demo-modal.component';
 
@@ -24,9 +24,9 @@ import { DemoModalComponent } from './demo-modal.component';
   imports: [
     FormsModule,
     JsonPipe,
-    DropdownComponent,
-    DropdownOptionTemplateDirective,
-    DropdownLabelTemplateDirective,
+    SelectComponent,
+    SelectOptionTemplateDirective,
+    SelectLabelTemplateDirective,
     ToastComponent,
     TabsComponent,
     TabComponent,
@@ -44,7 +44,7 @@ export class App {
   modalService = inject(ModalContainerService);
 
   // Dropdown state
-  dropdownOptions: DropdownOption[] = [
+  selectOptions: SelectOption[] = [
     { value: 1, label: 'Option 1' },
     { value: 2, label: 'Option 2' },
     { value: 3, label: 'Option 3' },
@@ -109,7 +109,7 @@ export class App {
   // Modal methods
   openModal() {
     const ref = this.modalService.openComponent(DemoModalComponent);
-    ref.onClose.subscribe((result) => {
+    ref.onClose.subscribe((result:any) => {
       if (result) {
         this.toastService.success(`Modal closed with: ${result}`, 'Modal Result');
       }

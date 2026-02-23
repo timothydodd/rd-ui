@@ -20,11 +20,11 @@ import {
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LucideAngularModule } from 'lucide-angular';
 import {
-  DropdownLabelTemplateDirective,
-  DropdownOptionTemplateDirective,
-} from './dropdown-template.directive';
+  SelectLabelTemplateDirective,
+  SelectOptionTemplateDirective,
+} from './select-template.directive';
 
-export interface DropdownOption {
+export interface SelectOption {
   value: any;
   label: string;
   disabled?: boolean;
@@ -42,40 +42,40 @@ export interface TriStateValue {
   excluded: any[];
 }
 
-export interface DropdownItem {
+export interface SelectItem {
   label?: string;
   value?: any;
   [key: string]: any;
 }
 
 @Component({
-  selector: 'rd-dropdown',
+  selector: 'rd-select',
   standalone: true,
   imports: [
     CommonModule,
     LucideAngularModule,
     FormsModule,
     NgTemplateOutlet,
-    DropdownOptionTemplateDirective,
-    DropdownLabelTemplateDirective,
+    SelectOptionTemplateDirective,
+    SelectLabelTemplateDirective,
   ],
   template: `
     <div
-      class="rd-dropdown-container"
+      class="rd-select-container"
       [class.disabled]="disabled()"
       [class.multiple]="multiple()"
-      [class.rd-dropdown-sm]="size() === 'sm'"
+      [class.rd-select-sm]="size() === 'sm'"
       [class.compact]="size() === 'compact'"
-      [class.rd-dropdown-lg]="size() === 'lg'"
+      [class.rd-select-lg]="size() === 'lg'"
     >
       <div
-        class="rd-dropdown-trigger"
+        class="rd-select-trigger"
         [class.focused]="isOpen()"
         [class.disabled]="disabled()"
         (click)="toggle()"
         #trigger
       >
-        <div class="rd-dropdown-value">
+        <div class="rd-select-value">
           @if (triState()) {
             @if (triStateValue().included.length === 0 && triStateValue().excluded.length === 0) {
               <span class="placeholder">{{ placeholder() }}</span>
@@ -138,15 +138,15 @@ export interface DropdownItem {
         <lucide-icon
           name="chevron-down"
           size="16"
-          class="rd-dropdown-arrow"
+          class="rd-select-arrow"
           [class.rotated]="isOpen()"
         ></lucide-icon>
       </div>
 
       @if (isOpen() && appendTo() !== 'body') {
-        <div class="rd-dropdown-panel" [style.min-width.px]="minWidth()" #dropdownPanel>
+        <div class="rd-select-panel" [style.min-width.px]="minWidth()" #selectPanel>
           @if (searchable()) {
-            <div class="rd-dropdown-search">
+            <div class="rd-select-search">
               <lucide-icon name="search" size="16" class="input-icon"></lucide-icon>
               <input
                 type="text"
@@ -160,8 +160,8 @@ export interface DropdownItem {
             </div>
           }
           @if (multiple() && showSelectAll() && filteredOptions().length > 0) {
-            <div class="rd-dropdown-select-all">
-              <div class="rd-dropdown-item select-all-item" (click)="toggleSelectAll()">
+            <div class="rd-select-select-all">
+              <div class="rd-select-item select-all-item" (click)="toggleSelectAll()">
                 <input
                   type="checkbox"
                   [checked]="isAllSelected()"
@@ -172,11 +172,11 @@ export interface DropdownItem {
               </div>
             </div>
           }
-          <div class="rd-dropdown-items custom-scrollbar" (scroll)="onScroll($event)">
+          <div class="rd-select-items custom-scrollbar" (scroll)="onScroll($event)">
             @if (triState()) {
               @for (option of filteredTriStateOptions(); track option.value) {
                 <div
-                  class="rd-dropdown-item tri-state-item"
+                  class="rd-select-item tri-state-item"
                   [class.included]="option.state === 'included'"
                   [class.excluded]="option.state === 'excluded'"
                   [class.disabled]="option.disabled"
@@ -197,7 +197,7 @@ export interface DropdownItem {
             } @else {
               @for (option of filteredOptions(); track option.value) {
                 <div
-                  class="rd-dropdown-item"
+                  class="rd-select-item"
                   [class.selected]="isSelected(option)"
                   [class.disabled]="option.disabled"
                   (click)="selectOption(option)"
@@ -226,13 +226,13 @@ export interface DropdownItem {
               }
             }
             @if (loading()) {
-              <div class="rd-dropdown-item rd-dropdown-loading">
+              <div class="rd-select-item rd-select-loading">
                 <lucide-icon name="loader-2" size="16" class="spin"></lucide-icon>
                 <span>Loading...</span>
               </div>
             }
             @if (filteredOptions().length === 0 && !loading()) {
-              <div class="rd-dropdown-item disabled">
+              <div class="rd-select-item disabled">
                 {{ searchTerm() ? 'No matching options' : 'No options available' }}
               </div>
             }
@@ -242,20 +242,20 @@ export interface DropdownItem {
       }
     </div>
   `,
-  styleUrl: './dropdown.component.scss',
+  styleUrl: './select.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DropdownComponent),
+      useExisting: forwardRef(() => SelectComponent),
       multi: true,
     },
   ],
 })
-export class DropdownComponent implements ControlValueAccessor, OnDestroy {
+export class SelectComponent implements ControlValueAccessor, OnDestroy {
   // Signal-based inputs
-  options = input<DropdownOption[]>([]);
+  options = input<SelectOption[]>([]);
   items = input<any[]>([]);
   bindLabel = input<string>('label');
   bindValue = input<string | null>('value');
@@ -275,8 +275,8 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
   appendTo = input<'body' | 'self'>('self');
 
   // Content child templates
-  optionTemplate = contentChild(DropdownOptionTemplateDirective);
-  labelTemplate = contentChild(DropdownLabelTemplateDirective);
+  optionTemplate = contentChild(SelectOptionTemplateDirective);
+  labelTemplate = contentChild(SelectLabelTemplateDirective);
 
   // Signal-based outputs
   selectionChange = output<any>();
@@ -287,13 +287,13 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
   // ViewChild as signal
   trigger = viewChild<ElementRef>('trigger');
   searchInput = viewChild<ElementRef>('searchInput');
-  dropdownPanel = viewChild<ElementRef>('dropdownPanel');
+  selectPanel = viewChild<ElementRef>('selectPanel');
 
   // Component state signals
   isOpen = signal(false);
   selectedValue = signal<any>(null);
   selectedLabel = signal<string>('');
-  selectedItems = signal<DropdownOption[]>([]);
+  selectedItems = signal<SelectOption[]>([]);
   searchTerm = signal<string>('');
   triStateOptions = signal<TriStateOption[]>([]);
   triStateValue = signal<TriStateValue>({ included: [], excluded: [] });
@@ -445,7 +445,7 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
     });
   }
 
-  isSelected(option: DropdownOption): boolean {
+  isSelected(option: SelectOption): boolean {
     if (this.multiple()) {
       return this.selectedItems().some((item) => item.value === option.value);
     }
@@ -491,7 +491,7 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
     }
   }
 
-  getOriginalItem(option: DropdownOption): any {
+  getOriginalItem(option: SelectOption): any {
     const items = this.items();
     const bindValue = this.bindValue();
 
@@ -543,7 +543,7 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
     }
   }
 
-  selectOption(option: DropdownOption) {
+  selectOption(option: SelectOption) {
     if (option.disabled) return;
 
     if (this.multiple()) {
@@ -611,7 +611,7 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
     this.selectionChange.emit(triStateValue);
   }
 
-  removeItem(event: Event, item: DropdownOption) {
+  removeItem(event: Event, item: SelectOption) {
     event.stopPropagation();
     if (this.disabled()) return;
 
@@ -625,10 +625,10 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
-    const clickedInsideDropdown = this.elementRef.nativeElement.contains(event.target);
+    const clickedInsideSelect = this.elementRef.nativeElement.contains(event.target);
     const clickedInsidePortal = this.portalContainer?.contains(event.target as Node);
 
-    if (!clickedInsideDropdown && !clickedInsidePortal) {
+    if (!clickedInsideSelect && !clickedInsidePortal) {
       if (this.isOpen()) {
         this.closePanel();
       }
@@ -663,7 +663,7 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
 
     // Create portal container
     const container = this.renderer.createElement('div') as HTMLElement;
-    container.className = 'rd-dropdown-panel rd-dropdown-portal';
+    container.className = 'rd-select-panel rd-select-portal';
     this.portalContainer = container;
 
     // Build panel content
@@ -681,7 +681,7 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
     // Search section
     if (this.searchable()) {
       html += `
-        <div class="rd-dropdown-search">
+        <div class="rd-select-search">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
           <input type="text" class="search-input" placeholder="${this.searchPlaceholder()}" />
         </div>
@@ -692,8 +692,8 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
     if (this.multiple() && this.showSelectAll() && this.filteredOptions().length > 0) {
       const isAllSelected = this.isAllSelected();
       html += `
-        <div class="rd-dropdown-select-all">
-          <div class="rd-dropdown-item select-all-item" data-action="select-all">
+        <div class="rd-select-select-all">
+          <div class="rd-select-item select-all-item" data-action="select-all">
             <input type="checkbox" ${isAllSelected ? 'checked' : ''} />
             <span class="select-all-label">${this.selectAllLabel()}</span>
           </div>
@@ -702,7 +702,7 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
     }
 
     // Items section
-    html += '<div class="rd-dropdown-items custom-scrollbar">';
+    html += '<div class="rd-select-items custom-scrollbar">';
 
     if (this.triState()) {
       this.filteredTriStateOptions().forEach((option, index) => {
@@ -720,7 +720,7 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
           icon = '<div class="unspecified-icon"></div>';
         }
         html += `
-          <div class="rd-dropdown-item tri-state-item ${stateClass} ${disabledClass}" data-index="${index}" data-value="${this.escapeHtml(String(option.value))}">
+          <div class="rd-select-item tri-state-item ${stateClass} ${disabledClass}" data-index="${index}" data-value="${this.escapeHtml(String(option.value))}">
             <div class="tri-state-icon">${icon}</div>
             ${this.escapeHtml(option.label)}
           </div>
@@ -754,7 +754,7 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
         }
 
         html += `
-          <div class="rd-dropdown-item ${selectedClass} ${disabledClass}" data-index="${index}" data-value="${this.escapeHtml(String(option.value))}">
+          <div class="rd-select-item ${selectedClass} ${disabledClass}" data-index="${index}" data-value="${this.escapeHtml(String(option.value))}">
             ${checkbox}
             ${label}
           </div>
@@ -765,7 +765,7 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
     // Loading state
     if (this.loading()) {
       html += `
-        <div class="rd-dropdown-item rd-dropdown-loading">
+        <div class="rd-select-item rd-select-loading">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
           <span>Loading...</span>
         </div>
@@ -774,7 +774,7 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
 
     // No options message
     if (this.filteredOptions().length === 0 && !this.loading()) {
-      html += `<div class="rd-dropdown-item disabled">${this.searchTerm() ? 'No matching options' : 'No options available'}</div>`;
+      html += `<div class="rd-select-item disabled">${this.searchTerm() ? 'No matching options' : 'No options available'}</div>`;
     }
 
     html += '</div>';
@@ -812,14 +812,14 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
     }
 
     // Items scroll
-    const itemsContainer = this.portalContainer.querySelector('.rd-dropdown-items');
+    const itemsContainer = this.portalContainer.querySelector('.rd-select-items');
     if (itemsContainer) {
       itemsContainer.addEventListener('scroll', (e) => this.onScroll(e));
     }
 
     // Option items
     const optionItems = this.portalContainer.querySelectorAll(
-      '.rd-dropdown-item:not(.select-all-item):not(.rd-dropdown-loading):not(.disabled)',
+      '.rd-select-item:not(.select-all-item):not(.rd-select-loading):not(.disabled)',
     );
     optionItems.forEach((item) => {
       item.addEventListener('click', (e) => {
@@ -932,7 +932,7 @@ export class DropdownComponent implements ControlValueAccessor, OnDestroy {
       } else {
         const selectedItems = values
           .map((v) => options.find((opt) => opt.value === v) || { value: v, label: v })
-          .filter(Boolean) as DropdownOption[];
+          .filter(Boolean) as SelectOption[];
         this.selectedItems.set(selectedItems);
       }
     } else {

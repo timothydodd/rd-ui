@@ -6,7 +6,7 @@ Shared Angular UI Components Library - a collection of generic, themeable UI com
 
 | Component | Selector | Description |
 |-----------|----------|-------------|
-| Dropdown | `rd-dropdown` | Single/multi-select dropdown with search, tri-state, and select-all features |
+| Select | `rd-select` | Single/multi-select dropdown with search, tri-state, and select-all features |
 | Modal | `rd-modal` | Service-based modal with component outlet pattern |
 | Modal Layout | `rd-modal-layout` | Modal layout with header/body/footer slots |
 | Toast | `rd-toast` | Animated toast notifications with auto-dismiss |
@@ -81,7 +81,7 @@ All components use CSS variables for theming. Define these in your app's global 
   --rd-border-color: #44475a;
   --rd-focus-ring: rgba(189, 147, 249, 0.3);
   --rd-modal-bg: #343746;
-  --rd-dropdown-bg: #343746;
+  --rd-select-bg: #343746;
   --rd-shadow-color: rgba(0, 0, 0, 0.3);
 
   // Spacing & sizing
@@ -105,25 +105,25 @@ Import a theme preset for quick setup:
 
 ## Usage Examples
 
-### Dropdown
+### Select
 
 ```typescript
-import { DropdownComponent, DropdownOption } from 'rd-ui';
+import { SelectComponent, SelectOption } from 'rd-ui';
 
 @Component({
-  imports: [DropdownComponent],
+  imports: [SelectComponent],
   template: `
-    <rd-dropdown
+    <rd-select
       [options]="options"
       [placeholder]="'Select an option'"
       [searchable]="true"
       [multiple]="true"
       [(ngModel)]="selectedValues"
-    ></rd-dropdown>
+    ></rd-select>
   `
 })
 export class MyComponent {
-  options: DropdownOption[] = [
+  options: SelectOption[] = [
     { value: 1, label: 'Option 1' },
     { value: 2, label: 'Option 2' },
   ];

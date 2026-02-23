@@ -11,43 +11,43 @@
   </header>
 
   <main class="demo-content">
-    <!-- Dropdown Section -->
+    <!-- Select Section -->
     <section class="component-section">
-      <h2>Dropdown</h2>
+      <h2>Select</h2>
 
       <div class="demo-row">
         <div class="demo-item">
           <h3>Single Select</h3>
-          <rd-dropdown
-            [options]="dropdownOptions"
+          <rd-select
+            [options]="selectOptions"
             [placeholder]="'Select an option'"
             [(ngModel)]="singleValue"
-          ></rd-dropdown>
+          ></rd-select>
           <p class="demo-value">Value: {{ singleValue() | json }}</p>
         </div>
 
         <div class="demo-item">
           <h3>Multi Select with Search</h3>
-          <rd-dropdown
-            [options]="dropdownOptions"
+          <rd-select
+            [options]="selectOptions"
             [placeholder]="'Select multiple'"
             [multiple]="true"
             [searchable]="true"
             [showSelectAll]="true"
             [(ngModel)]="multiValue"
-          ></rd-dropdown>
+          ></rd-select>
           <p class="demo-value">Value: {{ multiValue() | json }}</p>
         </div>
 
         <div class="demo-item">
           <h3>Tri-State Mode</h3>
-          <rd-dropdown
-            [options]="dropdownOptions"
+          <rd-select
+            [options]="selectOptions"
             [placeholder]="'Include/Exclude'"
             [triState]="true"
             [searchable]="true"
             [(ngModel)]="triStateValue"
-          ></rd-dropdown>
+          ></rd-select>
           <p class="demo-value">Value: {{ triStateValue() | json }}</p>
         </div>
       </div>
@@ -56,10 +56,10 @@
         <div class="demo-item">
           <h3>Size Variants</h3>
           <div class="size-variants">
-            <rd-dropdown [options]="dropdownOptions" [placeholder]="'Small'" [size]="'sm'"></rd-dropdown>
-            <rd-dropdown [options]="dropdownOptions" [placeholder]="'Compact'" [size]="'compact'"></rd-dropdown>
-            <rd-dropdown [options]="dropdownOptions" [placeholder]="'Default'"></rd-dropdown>
-            <rd-dropdown [options]="dropdownOptions" [placeholder]="'Large'" [size]="'lg'"></rd-dropdown>
+            <rd-select [options]="selectOptions" [placeholder]="'Small'" [size]="'sm'"></rd-select>
+            <rd-select [options]="selectOptions" [placeholder]="'Compact'" [size]="'compact'"></rd-select>
+            <rd-select [options]="selectOptions" [placeholder]="'Default'"></rd-select>
+            <rd-select [options]="selectOptions" [placeholder]="'Large'" [size]="'lg'"></rd-select>
           </div>
         </div>
       </div>
@@ -67,15 +67,15 @@
       <div class="demo-row">
         <div class="demo-item">
           <h3>Custom Templates</h3>
-          <p class="demo-description">Using rdDropdownLabel and rdDropdownOption directives for custom rendering</p>
-          <rd-dropdown
+          <p class="demo-description">Using rdSelectLabel and rdSelectOption directives for custom rendering</p>
+          <rd-select
             [items]="iconItems"
             bindLabel="name"
             [bindValue]="null"
             placeholder="Select with icon"
             [(ngModel)]="selectedIconItem"
           >
-            <ng-template rdDropdownLabel let-item>
+            <ng-template rdSelectLabel let-item>
               @if (item) {
                 <div class="custom-label">
                   <span class="item-icon">{{ item.icon }}</span>
@@ -85,21 +85,21 @@
                 <span class="placeholder">Select with icon</span>
               }
             </ng-template>
-            <ng-template rdDropdownOption let-item let-index="index">
+            <ng-template rdSelectOption let-item let-index="index">
               <div class="custom-option">
                 <span class="item-icon">{{ item.icon }}</span>
                 <span class="item-name">{{ item.name }}</span>
                 <span class="item-index">#{{ index + 1 }}</span>
               </div>
             </ng-template>
-          </rd-dropdown>
+          </rd-select>
           <p class="demo-value">Selected: {{ selectedIconItem() | json }}</p>
         </div>
 
         <div class="demo-item">
           <h3>Loading & Pagination</h3>
           <p class="demo-description">Opens dropdown to load, scroll to bottom for more</p>
-          <rd-dropdown
+          <rd-select
             [items]="paginatedItems()"
             bindLabel="name"
             [bindValue]="null"
@@ -111,13 +111,13 @@
             (scrollToEnd)="onScrollToEnd()"
             (searchChange)="onSearchChange($event)"
           >
-            <ng-template rdDropdownOption let-item>
+            <ng-template rdSelectOption let-item>
               <div class="paginated-option">
                 <strong>{{ item.name }}</strong>
                 <small>{{ item.description }}</small>
               </div>
             </ng-template>
-          </rd-dropdown>
+          </rd-select>
           <div class="event-log">
             <p>Open: {{ lastOpenChange() }}</p>
             <p>Search: "{{ lastSearchTerm() }}"</p>

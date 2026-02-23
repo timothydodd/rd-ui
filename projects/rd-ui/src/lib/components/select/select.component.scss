@@ -1,4 +1,4 @@
-.rd-dropdown-container {
+.rd-select-container {
   position: relative;
   width: 100%;
 
@@ -8,7 +8,7 @@
   }
 }
 
-.rd-dropdown-trigger {
+.rd-select-trigger {
   background-color: var(--rd-input-bg, var(--rd-surface-variant));
   border: 1px solid var(--rd-border-color);
   border-radius: var(--rd-border-radius);
@@ -33,7 +33,7 @@
   }
 }
 
-.rd-dropdown-value {
+.rd-select-value {
   flex: 1;
   overflow: hidden;
 
@@ -89,7 +89,7 @@
   }
 }
 
-.rd-dropdown-arrow {
+.rd-select-arrow {
   flex-shrink: 0;
   color: var(--rd-on-surface-muted);
   transition: transform 0.2s ease;
@@ -97,12 +97,12 @@
   &.rotated {
     transform: rotate(180deg);
   }
-  .rd-dropdown-trigger.focused & {
+  .rd-select-trigger.focused & {
     color: var(--rd-primary);
   }
 }
 
-.rd-dropdown-panel {
+.rd-select-panel {
   position: absolute;
   top: 100%;
   left: 0;
@@ -112,13 +112,13 @@
   max-width: 400px;
   margin-top: 0.25rem;
   padding: 0.25rem 0;
-  background-color: var(--rd-dropdown-bg, var(--rd-surface));
+  background-color: var(--rd-select-bg, var(--rd-surface));
   border: 1px solid var(--rd-border-color);
   border-radius: var(--rd-border-radius);
   box-shadow: 0 4px 12px var(--rd-shadow-color);
 
   // Portal mode - fixed positioning to escape overflow:hidden containers
-  &.rd-dropdown-portal {
+  &.rd-select-portal {
     position: fixed;
     top: auto;
     left: auto;
@@ -126,14 +126,14 @@
     z-index: 10000;
 
     // Ensure items container is scrollable in portal mode
-    .rd-dropdown-items {
+    .rd-select-items {
       max-height: 250px;
       overflow-y: auto;
     }
   }
 }
 
-.rd-dropdown-search {
+.rd-select-search {
   padding: 0.5rem 0.75rem;
   border-bottom: 1px solid var(--rd-border-color);
   background-color: var(--rd-surface);
@@ -170,14 +170,14 @@
   }
 }
 
-.rd-dropdown-select-all {
+.rd-select-select-all {
   border-bottom: 1px solid var(--rd-border-color);
   background-color: var(--rd-surface);
   position: sticky;
   top: 0;
   z-index: 9;
 
-  &:has(.rd-dropdown-search) {
+  &:has(.rd-select-search) {
     top: 48px;
   }
 
@@ -194,7 +194,7 @@
   }
 }
 
-.rd-dropdown-items {
+.rd-select-items {
   max-height: 250px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -221,7 +221,7 @@
   }
 }
 
-.rd-dropdown-item {
+.rd-select-item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -239,7 +239,7 @@
     cursor: not-allowed;
   }
 
-  &.selected:not(.rd-dropdown-container.multiple &) {
+  &.selected:not(.rd-select-container.multiple &) {
     background-color: var(--rd-primary);
     color: var(--rd-on-primary);
     font-weight: 500;
@@ -367,31 +367,31 @@
 }
 
 // Size variants
-.rd-dropdown-container {
-  &.rd-dropdown-sm {
-    .rd-dropdown-trigger {
+.rd-select-container {
+  &.rd-select-sm {
+    .rd-select-trigger {
       padding: 0.5rem 0.75rem;
       font-size: 0.875rem;
       height: calc(1.5em + 1rem + 2px);
     }
-    .rd-dropdown-item {
+    .rd-select-item {
       padding: 0.375rem 0.5rem;
       font-size: 0.875rem;
     }
   }
 
   &.compact {
-    .rd-dropdown-trigger {
+    .rd-select-trigger {
       padding: 6px 8px;
       font-size: 0.875rem;
       height: 32px;
       border-radius: 4px;
     }
-    .rd-dropdown-item {
+    .rd-select-item {
       padding: 0.375rem 0.5rem;
       font-size: 0.875rem;
     }
-    .rd-dropdown-value {
+    .rd-select-value {
       .selected-tags .tag {
         padding: 0.125rem 0.25rem;
         font-size: 0.6875rem;
@@ -404,19 +404,19 @@
     }
   }
 
-  &.rd-dropdown-lg {
-    .rd-dropdown-trigger {
+  &.rd-select-lg {
+    .rd-select-trigger {
       padding: 1rem 1.25rem;
       font-size: 1.125rem;
       height: calc(1.5em + 2rem + 2px);
     }
-    .rd-dropdown-item {
+    .rd-select-item {
       padding: 0.75rem 1rem;
       font-size: 1.125rem;
     }
   }
 
-  &.is-valid .rd-dropdown-trigger {
+  &.is-valid .rd-select-trigger {
     border-color: var(--rd-success);
     &.focused {
       border-color: var(--rd-success);
@@ -424,7 +424,7 @@
     }
   }
 
-  &.is-invalid .rd-dropdown-trigger {
+  &.is-invalid .rd-select-trigger {
     border-color: var(--rd-danger);
     &.focused {
       border-color: var(--rd-danger);
@@ -440,7 +440,7 @@
 }
 
 // Loading state
-.rd-dropdown-loading {
+.rd-select-loading {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -452,11 +452,11 @@
   }
 
   .spin {
-    animation: rd-dropdown-spin 1s linear infinite;
+    animation: rd-select-spin 1s linear infinite;
   }
 }
 
-@keyframes rd-dropdown-spin {
+@keyframes rd-select-spin {
   from {
     transform: rotate(0deg);
   }
