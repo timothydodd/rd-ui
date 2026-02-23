@@ -39,6 +39,7 @@ export class ModalContainerService {
     modalRef.instance.config = { data: config?.data };
     modalRef.instance.size = config?.size || 'default';
     modalRef.instance.centered = config?.centered ?? false;
+    modalRef.instance.closeOnBackdropClick = config?.closeOnBackdropClick ?? true;
 
     modalRef.instance.close = () => {
       this.close(modalId);
@@ -153,6 +154,7 @@ export interface ModalConfig {
   data?: any;
   size?: 'small' | 'default' | 'large' | 'full';
   centered?: boolean;
+  closeOnBackdropClick?: boolean;
 }
 
 export interface ModalRef {
