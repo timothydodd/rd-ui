@@ -93,7 +93,7 @@
   font-size: var(--rd-font-size-sm);
   color: var(--rd-on-surface);
 
-  lucide-icon {
+  .lucide {
     cursor: pointer;
     opacity: 0.7;
     transition: opacity 0.15s ease;

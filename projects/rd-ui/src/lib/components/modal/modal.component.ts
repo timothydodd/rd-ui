@@ -1,12 +1,12 @@
 import { NgComponentOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal, Type } from '@angular/core';
-import { LucideAngularModule } from 'lucide-angular';
+import { LucideDynamicIcon } from '@lucide/angular';
 import { ModalContainerService } from './modal-container.service';
 
 @Component({
   selector: 'rd-modal',
   standalone: true,
-  imports: [NgComponentOutlet, LucideAngularModule],
+  imports: [NgComponentOutlet, LucideDynamicIcon],
   template: `
     <div
       class="rd-backdrop"

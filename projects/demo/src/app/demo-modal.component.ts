@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ModalLayoutComponent, ModalComponent } from 'rd-ui';
 
 @Component({
@@ -24,6 +24,7 @@ import { ModalLayoutComponent, ModalComponent } from 'rd-ui';
       </div>
     </rd-modal-layout>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [`
     ul {
       margin: 1rem 0;

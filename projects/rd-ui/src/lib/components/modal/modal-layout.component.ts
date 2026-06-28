@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, ElementRef, inject, Injector, input } from '@angular/core';
-import { LucideAngularModule } from 'lucide-angular';
+import { LucideDynamicIcon } from '@lucide/angular';
 import { ModalContainerService } from './modal-container.service';
 import { ModalComponent } from './modal.component';
 
 @Component({
   selector: 'rd-modal-layout',
   standalone: true,
-  imports: [LucideAngularModule],
+  imports: [LucideDynamicIcon],
   template: `
     <div class="rd-modal-header">
       <ng-content select="[slot=header]">
@@ -16,7 +16,7 @@ import { ModalComponent } from './modal.component';
       </ng-content>
 
       <button class="rd-close" aria-label="Close" (click)="close()">
-        <lucide-icon name="x" size="20"></lucide-icon>
+        <svg lucideIcon="x" size="20"></svg>
       </button>
     </div>
 

@@ -274,7 +274,7 @@
         display: none;
       }
 
-      lucide-icon {
+      .lucide {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -294,7 +294,7 @@
         background-color: var(--rd-primary);
         border-color: var(--rd-primary);
 
-        lucide-icon.include-icon {
+        .lucide.include-icon {
           color: var(--rd-on-primary);
 
           svg {
@@ -309,7 +309,7 @@
         background-color: var(--rd-danger);
         border-color: var(--rd-danger);
 
-        lucide-icon.exclude-icon {
+        .lucide.exclude-icon {
           color: white;
 
           svg {
@@ -341,7 +341,7 @@
   font-size: var(--rd-font-size-sm);
   color: var(--rd-on-surface);
 
-  lucide-icon {
+  .lucide {
     cursor: pointer;
     opacity: 0.7;
     transition: opacity 0.15s ease;

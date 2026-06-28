@@ -18,7 +18,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { LucideAngularModule } from 'lucide-angular';
+import { LucideDynamicIcon } from '@lucide/angular';
 import {
   SelectLabelTemplateDirective,
   SelectOptionTemplateDirective,
@@ -53,7 +53,7 @@ export interface SelectItem {
   standalone: true,
   imports: [
     CommonModule,
-    LucideAngularModule,
+    LucideDynamicIcon,
     FormsModule,
     NgTemplateOutlet,
     SelectOptionTemplateDirective,
@@ -110,11 +110,11 @@ export interface SelectItem {
                 @for (item of selectedItems(); track item.value) {
                   <span class="tag">
                     {{ item.label }}
-                    <lucide-icon
-                      name="x"
+                    <svg
+                      lucideIcon="x"
                       size="12"
                       (click)="removeItem($event, item)"
-                    ></lucide-icon>
+                    ></svg>
                   </span>
                 }
               </div>
@@ -135,19 +135,19 @@ export interface SelectItem {
             }
           }
         </div>
-        <lucide-icon
-          name="chevron-down"
+        <svg
+          lucideIcon="chevron-down"
           size="16"
           class="rd-select-arrow"
           [class.rotated]="isOpen()"
-        ></lucide-icon>
+        ></svg>
       </div>
 
       @if (isOpen() && appendTo() !== 'body') {
         <div class="rd-select-panel" [style.min-width.px]="minWidth()" #selectPanel>
           @if (searchable()) {
             <div class="rd-select-search">
-              <lucide-icon name="search" size="16" class="input-icon"></lucide-icon>
+              <svg lucideIcon="search" size="16" class="input-icon"></svg>
               <input
                 type="text"
                 class="search-input"
@@ -184,9 +184,9 @@ export interface SelectItem {
                 >
                   <div class="tri-state-icon">
                     @if (option.state === 'included') {
-                      <lucide-icon name="check" size="14" class="include-icon"></lucide-icon>
+                      <svg lucideIcon="check" size="14" class="include-icon"></svg>
                     } @else if (option.state === 'excluded') {
-                      <lucide-icon name="x" size="14" class="exclude-icon"></lucide-icon>
+                      <svg lucideIcon="x" size="14" class="exclude-icon"></svg>
                     } @else {
                       <div class="unspecified-icon"></div>
                     }
@@ -227,7 +227,7 @@ export interface SelectItem {
             }
             @if (loading()) {
               <div class="rd-select-item rd-select-loading">
-                <lucide-icon name="loader-2" size="16" class="spin"></lucide-icon>
+                <svg lucideIcon="loader-2" size="16" class="spin"></svg>
                 <span>Loading...</span>
               </div>
             }

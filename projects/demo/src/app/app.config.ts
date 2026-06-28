@@ -1,6 +1,6 @@
-import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { LucideAngularModule, X, Check, ChevronDown, Search } from 'lucide-angular';
+import { provideLucideIcons, LucideX, LucideCheck, LucideChevronDown, LucideSearch } from '@lucide/angular';
 
 import { routes } from './app.routes';
 
@@ -8,8 +8,11 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    importProvidersFrom(
-      LucideAngularModule.pick({ X, Check, ChevronDown, Search })
+    provideLucideIcons(
+      LucideX,
+      LucideCheck,
+      LucideChevronDown,
+      LucideSearch,
     ),
   ],
 };
