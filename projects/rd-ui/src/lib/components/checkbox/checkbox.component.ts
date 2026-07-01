@@ -4,8 +4,7 @@ import {
   Component,
   forwardRef,
   input,
-  output,
-  signal,
+  model,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -53,12 +52,16 @@ const CUSTOM_VALUE_ACCESSOR: any = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxComponent implements ControlValueAccessor {
-  checked = signal(false);
+  /**
+   * Two-way bindable checked state. As a `model`, it exposes a `[checked]` input and a
+   * `checkedChange` output, and satisfies Signal Forms' `FormCheckboxControl` contract so the
+   * component can be used directly with the `[formField]` directive.
+   */
+  checked = model(false);
   disabled = input(false);
   label = input<string>('');
 
-  checkedChange = output<boolean>();
-
+  // Retained so legacy `[(ngModel)]` / reactive-forms consumers keep working via CVA.
   private onChange: (value: any) => void = () => {};
   private onTouched: () => void = () => {};
 
@@ -75,10 +78,8 @@ export class CheckboxComponent implements ControlValueAccessor {
   }
 
   toggle(): void {
-    const value = !this.checked();
-    this.checked.set(value);
-    this.onChange(value);
-    this.checkedChange.emit(value);
+    this.checked.set(!this.checked());
+    this.onChange(this.checked());
     this.onTouched();
   }
 }

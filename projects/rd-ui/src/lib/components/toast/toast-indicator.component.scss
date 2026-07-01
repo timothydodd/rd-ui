@@ -1,0 +1,236 @@
+/* Fallbacks are provided for every --rd-* token so the component looks right even in
+   apps that only map a subset of the rd-ui theme variables. */
+.rd-ti {
+  --rd-ti-surface: var(--rd-surface-container-high, var(--rd-surface-container, var(--rd-surface, #2a2a3e)));
+  --rd-ti-border: var(--rd-border-color, rgba(128, 128, 128, 0.35));
+  --rd-ti-shadow: var(--rd-shadow-color, rgba(0, 0, 0, 0.35));
+  --rd-ti-text: var(--rd-on-surface, #e8e8e8);
+  --rd-ti-muted: var(--rd-on-surface-muted, rgba(255, 255, 255, 0.55));
+  --rd-ti-variant: var(--rd-on-surface-variant, var(--rd-on-surface-muted, rgba(255, 255, 255, 0.7)));
+  --rd-ti-radius: var(--rd-border-radius, 8px);
+  --rd-ti-font-sm: var(--rd-font-size-sm, 0.85rem);
+
+  --rd-ti-success: var(--rd-success, #33c19f);
+  --rd-ti-error: var(--rd-danger, #dc506e);
+  --rd-ti-info: var(--rd-info, var(--rd-primary, #2294b4));
+  --rd-ti-warning: var(--rd-warning, #e0a800);
+
+  position: fixed;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+
+  &.bottom-right {
+    bottom: 16px;
+    right: 16px;
+    align-items: flex-end;
+  }
+  &.bottom-left {
+    bottom: 16px;
+    left: 16px;
+    align-items: flex-start;
+  }
+  &.top-right {
+    top: 16px;
+    right: 16px;
+    align-items: flex-end;
+    flex-direction: column-reverse;
+  }
+  &.top-left {
+    top: 16px;
+    left: 16px;
+    align-items: flex-start;
+    flex-direction: column-reverse;
+  }
+}
+
+/* Full-screen catcher so a click anywhere else closes the panel. Sits *below* the
+   panel and pill (which are given a higher z-index) so it never steals their clicks. */
+.rd-ti-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+/* ---- Collapsed / peeking pill ---- */
+.rd-ti-pill {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  height: 34px;
+  padding: 0 8px;
+  border-radius: 17px;
+  border: 1px solid var(--rd-ti-border);
+  background: var(--rd-ti-surface);
+  color: var(--rd-ti-text);
+  font-family: inherit;
+  font-size: var(--rd-ti-font-sm);
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 2px 6px var(--rd-ti-shadow);
+  transition: gap 0.25s ease, padding 0.25s ease, background 0.2s ease;
+
+  &.rd-ti-peek,
+  &:hover {
+    gap: 8px;
+    padding: 0 12px 0 9px;
+  }
+
+  &.success .rd-ti-bell {
+    color: var(--rd-ti-success);
+  }
+  &.error .rd-ti-bell {
+    color: var(--rd-ti-error);
+  }
+  &.info .rd-ti-bell {
+    color: var(--rd-ti-info);
+  }
+  &.warning .rd-ti-bell {
+    color: var(--rd-ti-warning);
+  }
+}
+
+.rd-ti-bell {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.rd-ti-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: var(--rd-ti-error);
+  color: var(--rd-on-primary, #fff);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rd-ti-msg {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--rd-ti-text);
+  transition: max-width 0.3s ease;
+
+  .rd-ti-pill.rd-ti-peek &,
+  .rd-ti-pill:hover & {
+    max-width: 260px;
+  }
+}
+
+/* ---- Expanded history panel ---- */
+.rd-ti-panel {
+  position: relative;
+  z-index: 1;
+  width: max-content;
+  min-width: 240px;
+  max-width: min(360px, 90vw);
+  padding: 6px;
+  margin-bottom: 8px;
+  background: var(--rd-ti-surface);
+  border: 1px solid var(--rd-ti-border);
+  border-radius: var(--rd-ti-radius);
+  box-shadow: 0 6px 20px var(--rd-ti-shadow);
+  animation: rd-ti-panel-in 0.15s ease-out;
+
+  .top-right &,
+  .top-left & {
+    margin-bottom: 0;
+    margin-top: 8px;
+  }
+}
+
+@keyframes rd-ti-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rd-ti-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px 8px;
+  font-size: var(--rd-ti-font-sm);
+  font-weight: 600;
+  color: var(--rd-ti-muted);
+}
+
+.rd-ti-clear {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 11px;
+  color: var(--rd-primary, #33c19f);
+}
+
+.rd-ti-item {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 8px;
+
+  & + .rd-ti-item {
+    border-top: 1px solid var(--rd-ti-border);
+  }
+
+  &.success .rd-ti-item-icon {
+    color: var(--rd-ti-success);
+  }
+  &.error .rd-ti-item-icon {
+    color: var(--rd-ti-error);
+  }
+  &.info .rd-ti-item-icon {
+    color: var(--rd-ti-info);
+  }
+  &.warning .rd-ti-item-icon {
+    color: var(--rd-ti-warning);
+  }
+}
+
+.rd-ti-item-icon {
+  flex: none;
+  margin-top: 1px;
+}
+
+.rd-ti-item-body {
+  min-width: 0;
+}
+
+.rd-ti-item-title {
+  font-weight: 600;
+  font-size: var(--rd-ti-font-sm);
+  color: var(--rd-ti-text);
+}
+
+.rd-ti-item-msg {
+  font-size: var(--rd-ti-font-sm);
+  color: var(--rd-ti-variant);
+  word-break: break-word;
+}
+
+.rd-ti-empty {
+  padding: 12px 8px;
+  text-align: center;
+  font-size: var(--rd-ti-font-sm);
+  color: var(--rd-ti-muted);
+}
