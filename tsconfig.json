@@ -12,9 +12,7 @@
     "isolatedModules": true,
     "experimentalDecorators": true,
     "paths": {
-      "rd-ui": [
-        "../../dist/rd-ui"
-      ]
+      "rd-ui": ["../../dist/rd-ui"]
     },
     "importHelpers": true,
     "target": "ES2022",

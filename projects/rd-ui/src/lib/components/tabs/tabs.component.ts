@@ -2,10 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChildren,
+  DestroyRef,
+  inject,
   QueryList,
   AfterContentInit,
   signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NgTemplateOutlet } from '@angular/common';
 import { TabComponent } from './tab.component';
 
@@ -47,6 +50,7 @@ import { TabComponent } from './tab.component';
 export class TabsComponent implements AfterContentInit {
   @ContentChildren(TabComponent) tabComponents!: QueryList<TabComponent>;
 
+  private destroyRef = inject(DestroyRef);
   tabs = signal<TabComponent[]>([]);
   activeTab = signal<number | string>(0);
 
@@ -59,7 +63,7 @@ export class TabsComponent implements AfterContentInit {
     }
 
     // Listen for changes in tab components
-    this.tabComponents.changes.subscribe(() => {
+    this.tabComponents.changes.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       this.tabs.set(this.tabComponents.toArray());
     });
   }

@@ -54,7 +54,10 @@ export class App {
   ];
   singleValue = signal<number | null>(null);
   multiValue = signal<number[]>([]);
-  triStateValue = signal<{ included: number[]; excluded: number[] }>({ included: [], excluded: [] });
+  triStateValue = signal<{ included: number[]; excluded: number[] }>({
+    included: [],
+    excluded: [],
+  });
 
   // Custom template dropdown state
   iconItems = [
@@ -110,7 +113,7 @@ export class App {
   // Modal methods
   openModal() {
     const ref = this.modalService.openComponent(DemoModalComponent);
-    ref.onClose.subscribe((result:any) => {
+    ref.onClose.subscribe((result: any) => {
       if (result) {
         this.toastService.success(`Modal closed with: ${result}`, 'Modal Result');
       }
@@ -147,7 +150,7 @@ export class App {
   }
 
   onScrollToEnd() {
-    this.scrollEndCount.update(c => c + 1);
+    this.scrollEndCount.update((c) => c + 1);
     this.loadMoreItems();
   }
 
@@ -175,7 +178,7 @@ export class App {
     setTimeout(() => {
       const newPage = page + 1;
       const newItems = this.generateItems(newPage, 10);
-      this.paginatedItems.update(items => [...items, ...newItems]);
+      this.paginatedItems.update((items) => [...items, ...newItems]);
       this.currentPage.set(newPage);
       this.paginationLoading.set(false);
     }, 800);

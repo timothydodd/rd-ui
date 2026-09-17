@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, ElementRef, inject, Injector, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  inject,
+  Injector,
+  input,
+} from '@angular/core';
 import { LucideDynamicIcon } from '@lucide/angular';
 import { ModalContainerService } from './modal-container.service';
 import { ModalComponent } from './modal.component';

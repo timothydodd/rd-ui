@@ -1,11 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  ViewEncapsulation,
+} from '@angular/core';
 
 @Component({
   selector: 'rd-skeleton',
   standalone: true,
   imports: [CommonModule],
-  template: `<div [ngClass]="containerClass()" [class]="styleClass()!" [ngStyle]="containerStyle()"></div>`,
+  template: `<div
+    [ngClass]="containerClass()"
+    [class]="styleClass()!"
+    [ngStyle]="containerStyle()"
+  ></div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   styleUrl: './skeleton.component.scss',
@@ -66,7 +76,13 @@ export class SkeletonComponent {
     }
 
     if (this.size()) {
-      return { ...this.style(), ...wh, width: this.size(), height: this.size(), borderRadius: this.borderRadius() };
+      return {
+        ...this.style(),
+        ...wh,
+        width: this.size(),
+        height: this.size(),
+        borderRadius: this.borderRadius(),
+      };
     } else {
       return { ...this.style(), ...wh, borderRadius: this.borderRadius() };
     }

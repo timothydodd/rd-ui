@@ -1,12 +1,18 @@
 /* Fallbacks are provided for every --rd-* token so the component looks right even in
    apps that only map a subset of the rd-ui theme variables. */
 .rd-ti {
-  --rd-ti-surface: var(--rd-surface-container-high, var(--rd-surface-container, var(--rd-surface, #2a2a3e)));
+  --rd-ti-surface: var(
+    --rd-surface-container-high,
+    var(--rd-surface-container, var(--rd-surface, #2a2a3e))
+  );
   --rd-ti-border: var(--rd-border-color, rgba(128, 128, 128, 0.35));
   --rd-ti-shadow: var(--rd-shadow-color, rgba(0, 0, 0, 0.35));
   --rd-ti-text: var(--rd-on-surface, #e8e8e8);
   --rd-ti-muted: var(--rd-on-surface-muted, rgba(255, 255, 255, 0.55));
-  --rd-ti-variant: var(--rd-on-surface-variant, var(--rd-on-surface-muted, rgba(255, 255, 255, 0.7)));
+  --rd-ti-variant: var(
+    --rd-on-surface-variant,
+    var(--rd-on-surface-muted, rgba(255, 255, 255, 0.7))
+  );
   --rd-ti-radius: var(--rd-border-radius, 8px);
   --rd-ti-font-sm: var(--rd-font-size-sm, 0.85rem);
 
@@ -70,7 +76,10 @@
   white-space: nowrap;
   cursor: pointer;
   box-shadow: 0 2px 6px var(--rd-ti-shadow);
-  transition: gap 0.25s ease, padding 0.25s ease, background 0.2s ease;
+  transition:
+    gap 0.25s ease,
+    padding 0.25s ease,
+    background 0.2s ease;
 
   &.rd-ti-peek,
   &:hover {

@@ -72,7 +72,9 @@ export interface InputSwitchChangeEvent {
 export class InputSwitchComponent {
   style = input<{ [klass: string]: any } | null>();
   styleClass = input<string>();
-  tabindex = input<number, number | string>(numberAttribute(undefined), { transform: numberAttribute });
+  tabindex = input<number, number | string>(numberAttribute(undefined), {
+    transform: numberAttribute,
+  });
   inputId = input<string>();
   name = input<string>();
   disabled = model<boolean>(false);
@@ -81,7 +83,9 @@ export class InputSwitchComponent {
   falseValue = input<any>(false);
   ariaLabel = input<string>();
   ariaLabelledBy = input<string>();
-  autofocus = input<boolean, boolean | string>(booleanAttribute(undefined), { transform: booleanAttribute });
+  autofocus = input<boolean, boolean | string>(booleanAttribute(undefined), {
+    transform: booleanAttribute,
+  });
 
   onChange = output<InputSwitchChangeEvent>();
 

@@ -4,18 +4,18 @@ Shared Angular UI Components Library - a collection of generic, themeable UI com
 
 ## Components
 
-| Component | Selector | Description |
-|-----------|----------|-------------|
-| Select | `rd-select` | Single/multi-select dropdown with search, tri-state, and select-all features |
-| Modal | `rd-modal` | Service-based modal with component outlet pattern |
-| Modal Layout | `rd-modal-layout` | Modal layout with header/body/footer slots |
-| Toast | `rd-toast` | Animated toast notifications with auto-dismiss |
-| Tabs | `rd-tabs` / `rd-tab` | Signal-based tabs with ContentChildren pattern |
-| Input Switch | `rd-input-switch` | Toggle switch with ControlValueAccessor |
-| Checkbox | `rd-checkbox` | Custom SVG checkbox with ControlValueAccessor |
-| Skeleton | `rd-skeleton` | Loading placeholder with shape variants |
-| Spinner | `rd-spinner` | Animated loading spinner |
-| Progress Bar | `rd-progress-bar` | Percentage-based progress display |
+| Component    | Selector             | Description                                                                  |
+| ------------ | -------------------- | ---------------------------------------------------------------------------- |
+| Select       | `rd-select`          | Single/multi-select dropdown with search, tri-state, and select-all features |
+| Modal        | `rd-modal`           | Service-based modal with component outlet pattern                            |
+| Modal Layout | `rd-modal-layout`    | Modal layout with header/body/footer slots                                   |
+| Toast        | `rd-toast`           | Animated toast notifications with auto-dismiss                               |
+| Tabs         | `rd-tabs` / `rd-tab` | Signal-based tabs with ContentChildren pattern                               |
+| Input Switch | `rd-input-switch`    | Toggle switch with ControlValueAccessor                                      |
+| Checkbox     | `rd-checkbox`        | Custom SVG checkbox with ControlValueAccessor                                |
+| Skeleton     | `rd-skeleton`        | Loading placeholder with shape variants                                      |
+| Spinner      | `rd-spinner`         | Animated loading spinner                                                     |
+| Progress Bar | `rd-progress-bar`    | Percentage-based progress display                                            |
 
 ## Installation
 
@@ -120,7 +120,7 @@ import { SelectComponent, SelectOption } from 'rd-ui';
       [multiple]="true"
       [(ngModel)]="selectedValues"
     ></rd-select>
-  `
+  `,
 })
 export class MyComponent {
   options: SelectOption[] = [
@@ -203,14 +203,10 @@ import { TabsComponent, TabComponent } from 'rd-ui';
   imports: [TabsComponent, TabComponent],
   template: `
     <rd-tabs>
-      <rd-tab [id]="1" [title]="'Tab 1'">
-        Content for tab 1
-      </rd-tab>
-      <rd-tab [id]="2" [title]="'Tab 2'">
-        Content for tab 2
-      </rd-tab>
+      <rd-tab [id]="1" [title]="'Tab 1'"> Content for tab 1 </rd-tab>
+      <rd-tab [id]="2" [title]="'Tab 2'"> Content for tab 2 </rd-tab>
     </rd-tabs>
-  `
+  `,
 })
 export class MyComponent {}
 ```
@@ -228,7 +224,7 @@ import { InputSwitchComponent } from 'rd-ui';
       [trueValue]="'yes'"
       [falseValue]="'no'"
     ></rd-input-switch>
-  `
+  `,
 })
 export class MyComponent {
   isEnabled = 'no';
@@ -242,12 +238,7 @@ import { CheckboxComponent } from 'rd-ui';
 
 @Component({
   imports: [CheckboxComponent],
-  template: `
-    <rd-checkbox
-      [label]="'Accept terms'"
-      [(ngModel)]="accepted"
-    ></rd-checkbox>
-  `
+  template: ` <rd-checkbox [label]="'Accept terms'" [(ngModel)]="accepted"></rd-checkbox> `,
 })
 export class MyComponent {
   accepted = false;
@@ -264,7 +255,7 @@ import { SkeletonComponent } from 'rd-ui';
   template: `
     <rd-skeleton [width]="'200px'" [height]="'20px'"></rd-skeleton>
     <rd-skeleton [shape]="'circle'" [size]="'50px'"></rd-skeleton>
-  `
+  `,
 })
 export class MyComponent {}
 ```
@@ -280,7 +271,7 @@ import { SpinnerComponent } from 'rd-ui';
     @if (loading) {
       <rd-spinner>Loading...</rd-spinner>
     }
-  `
+  `,
 })
 export class MyComponent {
   loading = true;
@@ -294,9 +285,7 @@ import { ProgressBarComponent } from 'rd-ui';
 
 @Component({
   imports: [ProgressBarComponent],
-  template: `
-    <rd-progress-bar [progress]="75"></rd-progress-bar>
-  `
+  template: ` <rd-progress-bar [progress]="75"></rd-progress-bar> `,
 })
 export class MyComponent {}
 ```
@@ -309,15 +298,12 @@ The library uses Lucide icons. Configure them in your `app.config.ts`:
 import { LucideAngularModule, X, Check, ChevronDown, Search } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    importProvidersFrom(
-      LucideAngularModule.pick({ X, Check, ChevronDown, Search })
-    ),
-  ],
+  providers: [importProvidersFrom(LucideAngularModule.pick({ X, Check, ChevronDown, Search }))],
 };
 ```
 
 Required icons for rd-ui components:
+
 - `X` - Close buttons, remove tags
 - `Check` - Checkmarks, tri-state included
 - `ChevronDown` - Dropdown arrow

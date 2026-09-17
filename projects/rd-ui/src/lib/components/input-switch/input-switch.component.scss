@@ -40,7 +40,11 @@
   bottom: 0;
   border: 1px solid transparent;
   background: var(--rd-surface-variant);
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
   border-radius: 30px;
 }
 

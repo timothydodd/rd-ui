@@ -21,7 +21,9 @@ import { ToastService } from './toast.service';
             }
             <div class="toast-message">{{ toast.message }}</div>
           </div>
-          <button class="close-button" (click)="removeToast(toast.id); $event.stopPropagation()">×</button>
+          <button class="close-button" (click)="removeToast(toast.id); $event.stopPropagation()">
+            ×
+          </button>
         </div>
       }
     </div>

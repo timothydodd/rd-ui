@@ -110,11 +110,7 @@ export interface SelectItem {
                 @for (item of selectedItems(); track item.value) {
                   <span class="tag">
                     {{ item.label }}
-                    <svg
-                      lucideIcon="x"
-                      size="12"
-                      (click)="removeItem($event, item)"
-                    ></svg>
+                    <svg lucideIcon="x" size="12" (click)="removeItem($event, item)"></svg>
                   </span>
                 }
               </div>
@@ -413,7 +409,7 @@ export class SelectComponent implements ControlValueAccessor, OnDestroy {
 
     effect(() => {
       if (this.isOpen() && this.searchable()) {
-        setTimeout(() => {
+        this.defer(() => {
           const input = this.searchInput();
           if (input) {
             input.nativeElement.focus();
@@ -432,10 +428,15 @@ export class SelectComponent implements ControlValueAccessor, OnDestroy {
       const filtered = this.filteredOptions();
 
       // Only update if portal is active and not already updating
-      if (this.portalContainer && this.isOpen() && this.appendTo() === 'body' && !this.isUpdatingPortal) {
+      if (
+        this.portalContainer &&
+        this.isOpen() &&
+        this.appendTo() === 'body' &&
+        !this.isUpdatingPortal
+      ) {
         this.isUpdatingPortal = true;
-        // Use setTimeout to batch updates and avoid recursive effect triggers
-        setTimeout(() => {
+        // Deferred to batch updates and avoid recursive effect triggers
+        this.defer(() => {
           if (this.portalContainer) {
             this.updatePortalContent();
           }
@@ -463,7 +464,7 @@ export class SelectComponent implements ControlValueAccessor, OnDestroy {
       this.onTouched();
       if (this.appendTo() === 'body') {
         // Create portal panel after a tick to allow position calculation
-        setTimeout(() => {
+        this.defer(() => {
           this.createPortalPanel();
           this.updatePanelPosition();
           this.setupPortalListeners();
@@ -636,8 +637,21 @@ export class SelectComponent implements ControlValueAccessor, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.pendingTimers.forEach((t) => clearTimeout(t));
+    this.pendingTimers.clear();
     this.destroyPortalPanel();
     this.removePortalListeners();
+  }
+
+  private pendingTimers = new Set<ReturnType<typeof setTimeout>>();
+
+  /** setTimeout that is automatically cancelled if the component is destroyed first. */
+  private defer(fn: () => void, ms: number) {
+    const timer = setTimeout(() => {
+      this.pendingTimers.delete(timer);
+      fn();
+    }, ms);
+    this.pendingTimers.add(timer);
   }
 
   private updatePanelPosition() {
@@ -799,7 +813,7 @@ export class SelectComponent implements ControlValueAccessor, OnDestroy {
       });
       searchInput.addEventListener('click', (e) => e.stopPropagation());
       // Focus search input
-      setTimeout(() => searchInput.focus(), 50);
+      this.defer(() => searchInput.focus(), 50);
     }
 
     // Select all

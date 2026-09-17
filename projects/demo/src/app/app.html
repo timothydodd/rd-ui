@@ -57,7 +57,11 @@
           <h3>Size Variants</h3>
           <div class="size-variants">
             <rd-select [options]="selectOptions" [placeholder]="'Small'" [size]="'sm'"></rd-select>
-            <rd-select [options]="selectOptions" [placeholder]="'Compact'" [size]="'compact'"></rd-select>
+            <rd-select
+              [options]="selectOptions"
+              [placeholder]="'Compact'"
+              [size]="'compact'"
+            ></rd-select>
             <rd-select [options]="selectOptions" [placeholder]="'Default'"></rd-select>
             <rd-select [options]="selectOptions" [placeholder]="'Large'" [size]="'lg'"></rd-select>
           </div>
@@ -67,7 +71,9 @@
       <div class="demo-row">
         <div class="demo-item">
           <h3>Custom Templates</h3>
-          <p class="demo-description">Using rdSelectLabel and rdSelectOption directives for custom rendering</p>
+          <p class="demo-description">
+            Using rdSelectLabel and rdSelectOption directives for custom rendering
+          </p>
           <rd-select
             [items]="iconItems"
             bindLabel="name"
@@ -166,19 +172,28 @@
             <rd-tab [id]="1" [title]="'Tab 1'">
               <div class="tab-content-demo">
                 <h4>Tab 1 Content</h4>
-                <p>This is the content for the first tab. The tabs component uses ContentChildren pattern and signal-based state management.</p>
+                <p>
+                  This is the content for the first tab. The tabs component uses ContentChildren
+                  pattern and signal-based state management.
+                </p>
               </div>
             </rd-tab>
             <rd-tab [id]="2" [title]="'Tab 2'">
               <div class="tab-content-demo">
                 <h4>Tab 2 Content</h4>
-                <p>This is the content for the second tab. Tabs are rendered lazily - only the active tab content is displayed.</p>
+                <p>
+                  This is the content for the second tab. Tabs are rendered lazily - only the active
+                  tab content is displayed.
+                </p>
               </div>
             </rd-tab>
             <rd-tab [id]="3" [title]="'Tab 3'">
               <div class="tab-content-demo">
                 <h4>Tab 3 Content</h4>
-                <p>This is the content for the third tab. You can add as many tabs as needed using the rd-tab component.</p>
+                <p>
+                  This is the content for the third tab. You can add as many tabs as needed using
+                  the rd-tab component.
+                </p>
               </div>
             </rd-tab>
           </rd-tabs>

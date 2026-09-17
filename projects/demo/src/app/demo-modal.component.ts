@@ -25,43 +25,45 @@ import { ModalLayoutComponent, ModalComponent } from 'rd-ui';
     </rd-modal-layout>
   `,
   changeDetection: ChangeDetectionStrategy.Eager,
-  styles: [`
-    ul {
-      margin: 1rem 0;
-      padding-left: 1.5rem;
-    }
-    li {
-      margin-bottom: 0.5rem;
-    }
-    code {
-      background: var(--rd-surface-container);
-      padding: 0.125rem 0.375rem;
-      border-radius: 4px;
-      font-size: 0.875rem;
-    }
-    .btn {
-      padding: 0.5rem 1rem;
-      border-radius: var(--rd-border-radius-sm);
-      border: none;
-      cursor: pointer;
-      font-weight: 500;
-      transition: all 0.15s ease;
-    }
-    .btn-primary {
-      background: var(--rd-primary);
-      color: var(--rd-on-primary);
-    }
-    .btn-primary:hover {
-      filter: brightness(1.1);
-    }
-    .btn-secondary {
-      background: var(--rd-surface-variant);
-      color: var(--rd-on-surface);
-    }
-    .btn-secondary:hover {
-      background: var(--rd-surface-container);
-    }
-  `],
+  styles: [
+    `
+      ul {
+        margin: 1rem 0;
+        padding-left: 1.5rem;
+      }
+      li {
+        margin-bottom: 0.5rem;
+      }
+      code {
+        background: var(--rd-surface-container);
+        padding: 0.125rem 0.375rem;
+        border-radius: 4px;
+        font-size: 0.875rem;
+      }
+      .btn {
+        padding: 0.5rem 1rem;
+        border-radius: var(--rd-border-radius-sm);
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.15s ease;
+      }
+      .btn-primary {
+        background: var(--rd-primary);
+        color: var(--rd-on-primary);
+      }
+      .btn-primary:hover {
+        filter: brightness(1.1);
+      }
+      .btn-secondary {
+        background: var(--rd-surface-variant);
+        color: var(--rd-on-surface);
+      }
+      .btn-secondary:hover {
+        background: var(--rd-surface-container);
+      }
+    `,
+  ],
 })
 export class DemoModalComponent {
   private modalComponent = inject(ModalComponent);
