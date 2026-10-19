@@ -116,7 +116,6 @@ import { SelectComponent, SelectOption } from 'rd-ui';
     <rd-select
       [options]="options"
       [placeholder]="'Select an option'"
-      [searchable]="true"
       [multiple]="true"
       [(ngModel)]="selectedValues"
     ></rd-select>

@@ -261,7 +261,7 @@ export class SelectComponent implements ControlValueAccessor, OnDestroy {
   minWidth = input<number>(200);
   maxTagsDisplay = input<number>(3);
   showCount = input<boolean>(false);
-  searchable = input<boolean>(false);
+  searchable = input<boolean>(true);
   searchPlaceholder = input<string>('Search...');
   showSelectAll = input<boolean>(false);
   selectAllLabel = input<string>('Select All');
